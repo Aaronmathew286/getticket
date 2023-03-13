@@ -1,0 +1,26 @@
+{% load static %}
+<html>
+    <head>
+        <title>login</title>
+    </head>
+    <body background="{% static 'img/' %}">
+
+        <center>
+            <form action="{% url 'loginpage' %}" method="post">
+                {% csrf_token %}
+            
+                <div style="width:400px;height:300px;;background-color:rgba(248, 248, 248, 0.37);margin-top:100px;border-radius:20px;outline:none;padding-top:20px">
+            
+                <h2><b>Log In</b></h2>
+            
+                <input type="text" placeholder="Username" name="uname" required style="width:280px;height:30px;border:none;border-bottom:2px solid rgba(101, 240, 233, 0.267);border-radius:10px;padding-left:100px;margin-bottom:20px;outline:none;"><br>
+            
+                <input type="password" placeholder="Password" name="pname" required style="width:280px;height:30px;border:none;border-bottom:2px solid rgba(101, 240, 233, 0.267);border-radius:10px;padding-left:100px;margin-bottom:20px;outline:none;"><br>
+            
+                <button type="submit" required style="background-color:rgb(168, 135, 25);width:280px;height:30px;border:none;border-bottom:2px solid rgba(101, 240, 233, 0.267);border-radius:10px;margin-bottom:20px;outline:none;padding-right:30px">Submit</button><br>
+                <font color="red">{{msg}}</font>
+                </div>
+            </form>
+        </center>
+    </body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/final.css' %}">
+
+</head>
+
+<body>
+
+    <div class="main-div">
+        <!-- page no1: firstpage starting -->
+
+        <div class="first-div">
+            <div class="head-div" style="font-style: normal;">
+                <div class="img-div">
+                    <div>
+                        <img src="{% static 'img/movie-reel.png' %}"> 
+                    </div>        
+                  <b id="logo">GET TICKET</b>
+                </div>
+                <a href="{% url 'homepage' %}"><b>Home</b></a>
+                <a href="#"><b>About</b></a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'logoutpage' %}">Logout</a>
+                {% else %}
+                <a href="{% url 'loginpage' %}">Login</a>
+                <a href="{% url 'registerpage' %}">Register</a>
+                {% endif %}
+
+                
+
+            </div>
+
+
+        </div>
+
+        <!-- firstpage ended -->
+
+        <center>
+            <h1 style="color:rgb(175, 139, 21)">Your Seats are Booked</h1>
+            <h3 style="color: aliceblue;">Thank you for the booking.Please visit us again</h3>
+        </center>
+        <div>
+            {% for i in film %}
+            <div class="c">
+                <img src="{{i.img.url}}" alt="Product image"
+                    style="height:350px;width:340px;margin-left: 50px;border: 2mm ridge rgba(65, 66, 58, 0.6);">
+            </div>
+            <div class="d">
+                
+                    {% csrf_token %}
+                    <h2>Booking Details</h2>
+                    <p><b>Name :</b> {{i.name}} </p>
+                    <p><b>Language :</b> {{i.language}}</p>
+                    <p><b>Screen :</b> {{i.screen}}</p>
+                    <p><b>Genre :</b> {{i.genre}}</p>
+                    <p><b>Timing :</b> {{i.time}}</p>
+                    <p><b>Duration :</b> {{i.duration}}</p>
+                    <p><b>Price :</b> {{i.price}} ₹</p>
+                    <p><b>Total :</b> {{total}}</p>
+
+                    <center>
+                        <a href="{% url 'homepage' %}"><button>
+                            Go To Home
+                        </button></a>
+                    </center>
+                   
+            </div>
+            
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>

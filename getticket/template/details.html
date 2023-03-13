@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/details.css' %}">
+
+</head>
+
+<body>
+
+    <div class="main-div">
+        <!-- page no1: firstpage starting -->
+
+        <div class="first-div">
+            <div class="head-div" style="font-style: normal;">
+                <div class="img-div">
+                    <div>
+                        <img src="{% static 'img/movie-reel.png' %}"> 
+                    </div>        
+                  <b id="logo">GET TICKET</b>
+                </div>
+                <a href="{% url 'homepage' %}"><b>Home</b></a>
+                <a href="#"><b>About</b></a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'logoutpage' %}">Logout</a>
+                {% else %}
+                <a href="{% url 'loginpage' %}">Login</a>
+                <a href="{% url 'registerpage' %}">Register</a>
+                {% endif %}
+
+                
+
+            </div>
+
+            <div class="body-div" style="color: aliceblue;">
+
+                <div class="c">
+                    {% for i in pro %}
+                    
+            
+                        <div class="image">
+            
+                            <img src="{{i.img.url}}" alt="Event 1 Image">
+            
+                        </div>
+                        <div class="b">
+                            <form action="{% url 'finalpage' %}?id={{i.id}}" method="post">
+                                {% csrf_token %}
+                            <center><h1>Booking Detail</h1></center>
+                            <div class="eve">
+                                <p><b>Name :</b> {{i.name}}</p>
+                                <p><b>Language :</b> {{i.language}}</p>
+                                <p><b>Screen :</b> {{i.screen}}</p>
+                                <p><b>Genre :</b> {{i.genre}}</p>
+                                <p><b>Timing :</b> {{i.time}}</p>
+                                <p><b>Duration :</b> {{i.duration}}</p>
+                                <p><b>Seats Available :</b> {{i.seatsavai}}</p>
+                                <p><b>Seats Needed :</b> <input name="seatsneed" placeholder="0"> </p>
+                                <p><b>Price for 1:</b> {{i.price}}</p>
+                                <button type="submit">Book Now</button>
+                            </div>
+                            </form>
+                        </div>
+                    
+            
+                    {% endfor %}
+                </div>
+
+
+
+        </div>
+
+        <!-- firstpage ended -->
+
